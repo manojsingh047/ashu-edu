@@ -1,27 +1,10 @@
 import type { NextPage } from "next";
-import Link from "next/link";
+import { APP_NAME } from "../constants/Constants";
 
 const Home: NextPage = () => {
   return (
     <div>
-      <ul>
-        <li>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/sign-in">
-            <a>Sign In</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/sign-up">
-            <a>Sign Up</a>
-          </Link>
-        </li>
-      </ul>
-      <h1>Hello Next.js</h1>
+      <h1>{APP_NAME}</h1>
     </div>
   );
 };

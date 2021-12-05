@@ -1,74 +1,58 @@
+import { Button } from "@mui/material";
+import { Form, Formik } from "formik";
 import type { NextPage } from "next";
-import { Formik, Form } from "formik";
-import { useRouter } from "next/router";
-import NextLink from "next/link";
-import { Box, Flex, Heading } from "@chakra-ui/layout";
-import { Input } from "@chakra-ui/input";
-import { Button } from "@chakra-ui/button";
-interface LoginProps {}
+import * as Yup from "yup";
+import FormTextInput from "../../components/form/FormTextInput";
 
-const SignIn: NextPage<LoginProps> = () => {
-  //   const [, login] = useLoginMutation();
-  //   const router = useRouter();
-
+const SignIn: NextPage = () => {
   return (
-    <div>
-      <Heading mb={10} textAlign="center">
-        Login
-      </Heading>
-      <Formik
-        initialValues={{
-          userNameOrEmail: "",
-          password: "",
-        }}
-        onSubmit={async (values, { setErrors }) => {
-          console.log(values);
-          //   const response = await login({
-          //     options: {
-          //       userNameOrEmail: values.userNameOrEmail,
-          //       password: values.password
-          //     }
-          //   });
-          //   if (!!response.data?.login.errors) {
-          //     setErrors(toErrorMap(response.data.login.errors));
-          //   } else if (!!response.data?.login.user) {
-          //     if (typeof router.query.next === 'string') {
-          //       router.push(router.query.next);
-          //     } else {
-          //       router.push('/');
-          //     }
-          //   }
-        }}
-      >
-        {({ isSubmitting }) => (
+    <section className="flex justify-center align-middle mt-10">
+      <div className="border p-10 w-96 shadow-md">
+        <p className="mb-10 text-center">SIGN IN</p>
+        <Formik
+          initialValues={{
+            email: "",
+            pass: "",
+          }}
+          validationSchema={Yup.object({
+            email: Yup.string()
+              .email("Invalid email address")
+              .required("Required"),
+            pass: Yup.string().required("Required"),
+          })}
+          onSubmit={(values, { setSubmitting }) => {
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              setSubmitting(false);
+            }, 400);
+          }}
+        >
           <Form>
-            <Box mt={4}>
-              <Input
-                name="userNameOrEmail"
-                placeholder="userNameOrEmail"
-                label="Username Or Email"
+            <div className="mb-2">
+              <FormTextInput
+                label="Email Address"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
               />
-            </Box>
-            <Box mt={4}>
-              <Input
-                name="password"
-                placeholder="password"
-                type="password"
+            </div>
+            <div className="mb-2">
+              <FormTextInput
                 label="Password"
+                name="pass"
+                type="text"
+                placeholder="Enter your password"
               />
-            </Box>
-            <Flex>
-              <Box ml="auto" mt="2">
-                {/* <NextLink href="/forgot-password">Forgot Password?</NextLink> */}
-              </Box>
-            </Flex>
-            <Button mt={4} type="submit" isLoading={isSubmitting}>
-              Login
-            </Button>
+            </div>
+            <div className="flex justify-center">
+              <Button className="text-center" type="submit" variant="contained">
+                Sign In
+              </Button>
+            </div>
           </Form>
-        )}
-      </Formik>
-    </div>
+        </Formik>
+      </div>
+    </section>
   );
 };
 export default SignIn;

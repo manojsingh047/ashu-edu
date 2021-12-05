@@ -29,7 +29,7 @@ const SignUp: NextPage = () => {
   return (
     <section className="flex justify-center align-middle mt-10">
       <div className="border p-10 w-96 shadow-md">
-        <p className="mb-10 text-center">SIGN UP</p>
+        <p className="font-bold mb-10 text-center">SIGN UP</p>
         <Formik
           initialValues={{
             firstName: "",
